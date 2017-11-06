@@ -1,0 +1,82 @@
+<div>
+  <div *ngIf="test === 1; then succ else fail"></div>
+  <div [hidden]="test == 1">is hidden</div>
+  <ng-template #succ>yes</ng-template>
+  <ng-template #fail>no</ng-template>
+
+  <ng-content select=".heading"></ng-content>
+  <ng-content select=".body"></ng-content>
+
+  <button (click)="onClick()">test</button>
+  <ul>
+    <li *ngFor="let item of list; index as i">
+      {{item.v}} - {{i}}
+    </li>
+  </ul>
+  <div
+    [class.isGood]="test == 1"
+    [style.color]="red"
+    [ngStyle]="{
+      'color': !!test ? 'red' : 'blue'
+    }"
+    [ngClass]="{
+      'test': !!test
+    }">
+  </div>
+
+  <input appSkunsik [format]="'uppercase'"/>
+
+  <hr>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div ngModelGroup="contact">
+        <label for="myName">My name:</label>
+        <input
+          ngModel
+          required
+          minlength="3"
+          [ngClass]="{
+            'error': myName.touched && !myName.valid
+          }"
+          name="myName" #myName="ngModel"
+          id="myName"
+          (change)="onChange(myName)"
+          type="text">
+      <div *ngIf="myName.touched && !myName.valid">
+        <div *ngIf="myName.errors.required">It's required</div>
+        <div *ngIf="myName.errors.minlength">Min length is 3</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="contactMethod">Contact Method</label>
+      <select name="contactMethod"
+        ngModel
+        id="contactMethod">
+          <option
+            *ngFor="let method of methods"
+            [ngValue]="method">{{ method.name }}</option>
+      </select>
+    </div>
+    <div class="radio">
+      <label for="">
+        <input ngModel type="radio" value="1" name="contactMethod2">
+      </label>
+    </div>
+    <div class="radio">
+        <label for="">
+          <input ngModel type="radio" value="2" name="contactMethod2">
+        </label>
+      </div>
+    <button type="submit"
+      [disabled]="f.invalid">
+      send
+    </button>
+    <hr>
+    {{f.value | json}}
+    <hr>
+    <h4>Server data</h4>
+    <div>
+      <b>{{data | json}}</b>
+    </div>
+  </form>
+</div>

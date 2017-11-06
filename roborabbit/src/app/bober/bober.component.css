@@ -1,0 +1,11 @@
+button {
+  background: red;
+}
+
+.error {
+  background: #F8DCDC;
+}
+
+.ng-invalid {
+  border-color: red;
+}
