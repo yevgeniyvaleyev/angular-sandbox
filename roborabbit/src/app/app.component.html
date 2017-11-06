@@ -1,10 +1,16 @@
 <ul>
-  <li routerLinkActive="active-nav">
+  <li routerLinkActive="active-nav" [routerLinkActiveOptions]="{exact: true}">
     <a routerLink="/">Experiments 0</a>
   </li>
   <li routerLinkActive="active-nav">
     <a routerLink="/experiment/1/111"
       [queryParams]="{alias: 'yo'}">Experiments 1</a>
+  </li>
+  <li routerLinkActive="active-nav">
+    <a routerLink="/resolve-test">Resolve test</a>
+  </li>
+  <li routerLinkActive="active-nav">
+    <a routerLink="/lazy">Lazy loading</a>
   </li>
 </ul>
 <hr>
